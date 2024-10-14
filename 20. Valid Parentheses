@@ -1,0 +1,50 @@
+import java.util.*;
+class Solution {
+    public boolean isValid(String s)
+    {
+        ArrayList<String> arr = new ArrayList<String>();
+        if (s.length()%2!=0)
+        return false;
+        for(int i =0;i<s.length();i++)
+        {
+            String ch=s.substring(i,i+1);
+            if ("{([".contains(ch))
+                {
+                    arr.add(ch);
+                }
+            else if ("]})".contains(ch))    
+            {
+                    if (ch.equals("}"))
+                    {
+                        if (arr.size()!=0&&arr.getLast().equals("{"))
+                            {
+                                arr.removeLast();
+                            }
+                            else 
+                            return false;
+                    }
+                    else if (ch.equals("]"))
+                    {
+                        if (arr.size()!=0&&arr.getLast().equals("["))
+                            {
+                                arr.removeLast();
+                            }
+                            else 
+                            return false;
+                    }
+                    else if (ch.equals(")"))
+                    {
+                        if (arr.size()!=0&&arr.getLast().equals("("))
+                            {
+                                arr.removeLast();
+                            }
+                            else 
+                            return false;
+                    } 
+            }
+        }
+        if (arr.size()>0)
+        return false ;
+        return true;
+    }
+}
